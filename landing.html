@@ -82,7 +82,7 @@
         let name = document.getElementById("name").value;
         let email = document.getElementById("email").value;
     
-        let response = await fetch("https://horizon-auto-website.onrender.com/landing.html#signup", {
+        let response = await fetch("#signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, email: email })
@@ -92,6 +92,7 @@
         alert(result.success || result.error);
     });
     </script>
+    
     
   
   <!-- Contact Section -->
