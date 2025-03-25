@@ -63,22 +63,37 @@
   </section>
 
   <!-- Sign Up Section -->
-  <section id="signup" class="py-16 container mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-6">Join the Beta</h2>
-    <p class="text-lg mb-8">Sign up now to get early access to Horizon Automation.</p>
-    <form class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-      <div class="mb-4">
-        <label for="name" class="block text-left font-semibold">Name</label>
-        <input type="text" id="name" class="w-full p-2 border rounded-md" placeholder="Your Name" required>
-      </div>
-      <div class="mb-4">
-        <label for="email" class="block text-left font-semibold">Email</label>
-        <input type="email" id="email" class="w-full p-2 border rounded-md" placeholder="Your Email" required>
-      </div>
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700">Sign Up</button>
-    </form>
-  </section>
-
+  <form id="signup-form" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div class="mb-4">
+      <label for="name" class="block text-left font-semibold">Name</label>
+      <input type="text" id="name" name="name" class="w-full p-2 border rounded-md" placeholder="Your Name" required>
+    </div>
+    <div class="mb-4">
+      <label for="email" class="block text-left font-semibold">Email</label>
+      <input type="email" id="email" name="email" class="w-full p-2 border rounded-md" placeholder="Your Email" required>
+    </div>
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700">Sign Up</button>
+  </form>
+  
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
+    
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+    
+        let response = await fetch("https://horizon-auto-website.onrender.com/landing.html/backend/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name, email: email })
+        });
+    
+        let result = await response.json();
+        alert(result.success || result.error);
+    });
+    </script>
+    
+  
   <!-- Contact Section -->
   <section id="contact" class="py-16 container mx-auto text-center">
     <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
