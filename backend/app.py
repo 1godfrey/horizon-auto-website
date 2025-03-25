@@ -1,18 +1,17 @@
 from flask import Flask, request, jsonify
 import smtplib
-import os
 
 app = Flask(__name__)
 
 # Email Configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_ADDRESS = "senses10k@gmail.com"
-EMAIL_PASSWORD = "xaqc xxkr wulh lbro" 
+EMAIL_ADDRESS = "senses10k@gmail.com"  
+EMAIL_PASSWORD = "xaqc xxkr wulh lbro"  
 
-@app.route("/signup", methods=["POST"])
+@app.route("/backend/signup", methods=["POST"])
 def signup():
-    data = request.json  # Expecting JSON input
+    data = request.json
     name = data.get("name")
     email = data.get("email")
 
@@ -26,10 +25,10 @@ def signup():
 
     try:
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()  # Secure connection
+            server.starttls()  # Secure the connection
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             server.sendmail(EMAIL_ADDRESS, "horizonautomationtools@gmail.com", message)
-        
+
         return jsonify({"success": "Email sent"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
